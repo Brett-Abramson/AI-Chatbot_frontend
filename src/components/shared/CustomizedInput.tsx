@@ -8,7 +8,16 @@ type Props = {
 };
 
 const CustomizedInput = (props: Props) => {
-  return <TextField name={props.name} label={props.label} type={props.type} />
+  return (
+    <TextField
+      margin="normal"
+      InputLabelProps={{ style: { color: "white" } }}
+      InputProps={{ style: { width: "300px", borderRadius: 10, fontSize: 10 } }}
+      name={props.name}
+      label={props.label}
+      type={props.type}
+    />
+  );
 };
 
 export default CustomizedInput;

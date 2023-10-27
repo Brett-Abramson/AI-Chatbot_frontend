@@ -10,7 +10,7 @@ body {
 }
 
 .image-inverted {
-  filter: invert(100%)
+  filter: invert(100%);
 }
 
 .nav-link {
@@ -22,4 +22,9 @@ body {
   border-radius: 10px;
   text-decoration: none;
   letter-spacing: 1px;
+}
+
+.MuiOutlinedInput-input-root.Mui-focused,
+.MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
 }
