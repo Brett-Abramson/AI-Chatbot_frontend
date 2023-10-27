@@ -14,9 +14,8 @@ const Login = () => {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    toast.loading("Signing In", { id: "login" });
-
     try {
+      toast.loading("Signing In", { id: "login" });
       await auth?.login(email, password);
       toast.dismiss("login"); // dismiss loading toast
       toast.success("Signed In Succesfully", { id: " login " });

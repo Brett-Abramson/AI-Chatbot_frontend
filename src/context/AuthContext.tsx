@@ -5,7 +5,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import { loginUser } from "../components/helpers/api-communicator";
+import {
+  checkAuthStatus,
+  loginUser,
+} from "../components/helpers/api-communicator";
 
 type User = {
   name: string;
@@ -27,6 +30,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // verify if cookies are still there
   useEffect(() => {
     // fetch if the user's cookies are valid, then skip login
+    async function checkStatus() {
+      const data = await checkAuthStatus();
+      if (data) {
+        setUser({ email: data.email, name: data.name });
+        setIsLoggedIn(true);
+      }
+    }
+    checkStatus();
   }, []);
 
   const login = async (email: string, password: string) => {
@@ -36,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoggedIn(true);
     }
   };
-  
+
   const signup = async (name: string, email: string, password: string) => {};
   const logout = async () => {};
 
