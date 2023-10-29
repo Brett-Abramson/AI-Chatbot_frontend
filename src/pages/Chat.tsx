@@ -2,6 +2,44 @@ import { Avatar, Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
+import ChatItem from "../components/chat/ChatItem";
+const chatMessages = [
+  {
+    role: "user",
+    content: "Hello, AI assistant!",
+  },
+  {
+    role: "ai_assistant",
+    content: "Hello! How can I help you today?",
+  },
+  {
+    role: "user",
+    content: "Whats the weather like today?",
+  },
+  {
+    role: "ai_assistant",
+    content:
+      "Its sunny with a high of 25°C. Would you like to know the forecast for the week?",
+  },
+  {
+    role: "user",
+    content: "Yes, please!",
+  },
+  {
+    role: "ai_assistant",
+    content:
+      "Tomorrow its expected to be cloudy with a chance of rain. The rest of the week looks clear with temperatures ranging between 20°C to 28°C.",
+  },
+  {
+    role: "user",
+    content: "Thank you!",
+  },
+  {
+    role: "ai_assistant",
+    content:
+      "Youre welcome! If you have any other questions, feel free to ask.",
+  },
+];
 
 const Chat = () => {
   const auth = useAuth();
@@ -104,7 +142,11 @@ const Chat = () => {
             overflowY: "auto",
             scrollBehavior: "smooth",
           }}
-        ></Box>
+        >
+          {chatMessages.map((chat, index) => (
+            <ChatItem content={chat.content} role={chat.role} key={index} />
+          ))}
+        </Box>
       </Box>
     </Box>
   );
