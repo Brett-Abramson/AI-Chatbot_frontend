@@ -47,6 +47,7 @@ const ChatItem = ({
           messageBlocks.length &&
           messageBlocks.map((block) =>
             isCodeBlock(block) ? (
+              // // grab the first word of the code block and put it in the language
               <SyntaxHighlighter style={coldarkCold} language="javascript">
                 {block}
               </SyntaxHighlighter>
@@ -63,7 +64,23 @@ const ChatItem = ({
         {auth?.user?.name.split(" ")[1][0]}
       </Avatar>
       <Box>
-        <Typography fontSize={"20px"}>{content}</Typography>
+        <Box>
+          {!messageBlocks && (
+            <Typography fontSize={"20px"}>{content}</Typography>
+          )}
+          {messageBlocks &&
+            messageBlocks.length &&
+            messageBlocks.map((block) =>
+              isCodeBlock(block) ? (
+                // // grab the first word of the code block and put it in the language
+                <SyntaxHighlighter style={coldarkCold} language="javascript">
+                  {block}
+                </SyntaxHighlighter>
+              ) : (
+                <Typography fontSize={"20px"}>{content}</Typography>
+              )
+            )}
+        </Box>
       </Box>
     </Box>
   );
