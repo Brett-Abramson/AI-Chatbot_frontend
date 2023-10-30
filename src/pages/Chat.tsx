@@ -1,10 +1,14 @@
 import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
-import { sendChatRequest } from "../components/helpers/api-communicator";
+import {
+  getUserChats,
+  sendChatRequest,
+} from "../components/helpers/api-communicator";
+import toast from "react-hot-toast";
 type Message = {
   role: "user" | "ai_assistant";
   content: string;
@@ -23,6 +27,21 @@ const Chat = () => {
     const chatData = await sendChatRequest(content);
     setChatMessages([...chatData.chats]);
   };
+
+  useLayoutEffect(() => {
+    if (auth?.isLoggedIn && auth?.user) {
+      toast.loading("Loading Chats", { id: "loadchats" });
+      getUserChats()
+        .then((data) => {
+          setChatMessages([...data.chats]);
+          toast.success("Successfully Loaded Chats", { id: "loadchats" });
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("Error Loading Chats", { id: "loadchats" });
+        });
+    }
+  }, [auth]);
 
   return (
     <Box
