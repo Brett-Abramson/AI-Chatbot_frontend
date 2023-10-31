@@ -1,6 +1,7 @@
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import TypingAnim from "../components/typer/TypingAnim";
+import Footer from "../components/footer/Footer";
 
 function Home() {
   const theme = useTheme();
@@ -17,30 +18,31 @@ function Home() {
           mx: "auto",
           mt: 3,
         }}
-      ><Box>
-        <TypingAnim />
-      </Box>
-      <Box
-        sx={{
-          width: isBelowMd ? "80%" : "60%",
-          display: "flex",
-          flexDirection: { md: "row", xs: "column", sm: "column" },
-          gap: 5,
-          my: 10,
-        }}
       >
-        <img
-          src="robot.png"
-          alt="robot"
-          style={{ width: "200px", margin: "auto" }}
-        />
-        <img
-          className="image-inverted rotate"
-          src="openai.png"
-          alt="openai"
-          style={{ width: "200px", margin: "auto" }}
-        />
-      </Box>
+        <Box>
+          <TypingAnim />
+        </Box>
+        <Box
+          sx={{
+            width: isBelowMd ? "80%" : "60%",
+            display: "flex",
+            flexDirection: { md: "row", xs: "column", sm: "column" },
+            gap: 5,
+            my: 10,
+          }}
+        >
+          <img
+            src="robot.png"
+            alt="robot"
+            style={{ width: "200px", margin: "auto" }}
+          />
+          <img
+            className="image-inverted rotate"
+            src="openai.png"
+            alt="openai"
+            style={{ width: "200px", margin: "auto" }}
+          />
+        </Box>
       </Box>
 
       <Box sx={{ display: "flex", width: "100%", mx: "auto" }}>
@@ -58,6 +60,7 @@ function Home() {
           }}
         />
       </Box>
+      <Footer />
     </Box>
   );
 }
