@@ -10,11 +10,11 @@ const Footer = () => {
           padding: 20,
           minHeight: "20vh",
           maxHeight: "30vh",
-          marginTop: 50,
+          marginTop: 60,
         }}
       >
         <p style={{ fontSize: "30px", textAlign: "center" }}>
-          Built following{" "}
+          Built following
           <span>
             <Link
               className="nav-link"
