@@ -1,9 +1,10 @@
 import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import {
   deleteUSerChats,
   getUserChats,
@@ -15,9 +16,11 @@ type Message = {
   content: string;
 };
 const Chat = () => {
+  const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const auth = useAuth();
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
+
   const handleSubmit = async () => {
     const content = inputRef.current?.value as string;
     if (inputRef && inputRef.current) {
@@ -53,6 +56,11 @@ const Chat = () => {
           console.error(error);
           toast.error("Error Loading Chats", { id: "loadchats" });
         });
+    }
+  }, [auth]);
+  useEffect(() => {
+    if (!auth?.user) {
+      return navigate("/login");
     }
   }, [auth]);
 
