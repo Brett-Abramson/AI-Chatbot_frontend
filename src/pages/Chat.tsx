@@ -5,6 +5,7 @@ import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
 import {
+  deleteUSerChats,
   getUserChats,
   sendChatRequest,
 } from "../components/helpers/api-communicator";
@@ -26,6 +27,18 @@ const Chat = () => {
     setChatMessages((prev) => [...prev, newMessage]);
     const chatData = await sendChatRequest(content);
     setChatMessages([...chatData.chats]);
+  };
+
+  const handleDeleteChats = async () => {
+    try {
+      toast.loading("DeletingChats", { id: "deletechats" });
+      await deleteUSerChats();
+      setChatMessages([]);
+      toast.success("Deleted Chats Successfully", { id: "deletechats" });
+    } catch (error) {
+      console.error(error);
+      toast.error("Deleting chats", { id: "deletechats" });
+    }
   };
 
   useLayoutEffect(() => {
@@ -92,6 +105,7 @@ const Chat = () => {
             Education, etc. But avoid sharing personal information.
           </Typography>
           <Button
+            onClick={handleDeleteChats}
             sx={{
               width: "200px",
               my: "auto",
